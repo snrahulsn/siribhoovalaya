@@ -19,6 +19,7 @@
 .stp h3{font-size:18px;margin:0 0 4px}
 .stp p{font-size:15px;color:var(--muted);margin:0}
 .go{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+main{padding-bottom:72px}
 .fb{margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}
 .fb .two{align-items:start}
 .fb form{display:grid;gap:14px}
@@ -39,12 +40,13 @@
   </div>
 
   <div class="frame two">
-    <div class="vid" id="howto" data-link="howto"><span class="t">How to correct a verse</span><span>Short walkthrough · coming soon</span></div>
+    <div><div class="vid" id="howto"><span class="t">The film</span><span>How the poem was read</span></div><p class="msg" style="margin-top:10px">Watch how the numbers were turned into letters, and where help is needed.</p></div>
     <div>
       <div class="steps">
         <div class="stp"><span class="k">1</span><div><h3>Open a chapter</h3><p>Every verse is shown in Kannada, in Roman letters and in rough English.</p></div></div>
-        <div class="stp"><span class="k">2</span><div><h3>Suggest a correction</h3><p>Under the verse, “Suggest a correction” opens a short form on GitHub with the verse already filled in. A free GitHub account is needed.</p></div></div>
-        <div class="stp"><span class="k">3</span><div><h3>It goes into the text</h3><p>Corrections are checked and added to the site and the download, with the reader credited.</p></div></div>
+        <div class="stp"><span class="k">2</span><div><h3>Suggest a correction</h3><p>Under the verse, “Suggest a correction” opens a short form on GitHub with the verse already filled in. You need a free GitHub account.</p></div></div>
+        <div class="stp"><span class="k">3</span><div><h3>Others review it</h3><p>Your correction becomes a proposed change on GitHub. Other readers check it and approve it.</p></div></div>
+        <div class="stp"><span class="k">4</span><div><h3>It goes into the text</h3><p>Once two readers, including a maintainer, approve it, it goes into the site and the download automatically, with your name on the verse.</p></div></div>
       </div>
       <div class="go"><a class="btn primary" href="chapters.html">Open the chapters</a><a class="btn" id="repo" target="_blank" rel="noopener">The data and tools on GitHub</a></div>
     </div>
@@ -55,8 +57,8 @@
 <script src="layout.js?v=5"></script>
 <script>
 document.getElementById('repo').href = window.SITE_REPO || 'https://github.com/snrahulsn/siribhoovalaya';
-const HOWTO = (window.SITE_LINKS || {}).howto;
-if (HOWTO) { const v = document.getElementById('howto'); const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(HOWTO) + '?rel=0&modestbranding=1'; f.title = 'How to correct a verse'; f.allowFullscreen = true; f.style.cssText = 'width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px'; v.replaceWith(f); }
+const HOWTO = (window.SITE_LINKS || {}).howto || (window.SITE_LINKS || {}).youtube;
+if (HOWTO) { const v = document.getElementById('howto'); const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(HOWTO) + '?rel=0&modestbranding=1'; f.title = 'Siribhūvalaya: the film'; f.allowFullscreen = true; f.style.cssText = 'width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px'; v.replaceWith(f); }
 
 </script>
 </body>
