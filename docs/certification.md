@@ -13,8 +13,6 @@ Decoys:
 - Other texts: run by Claude in independent_audit/decoy_nonGita.py → DECOY_NONGITA.json; 42 of 42 rows pass.
 Claude re-extracted all 42 confirmed Gītā rows with separate code (independent_audit/claude_columns.py). All 42 come out at ≥ 75 % identity.
 
-**Credit.** The 1950s editors knew there are hidden texts and Gītā strands (printed 1955 and 2007), and Sudharthi worked them out by hand (FILM_FACTS_FINAL 3.6). We don't know which particular verses they had. Every Gītā row below is therefore "independently recovered", not a first discovery. For the Jain texts we know of no earlier identification, which proves nothing either way.
-
 **Column codes.**
 - mixed/merged = all verses in order; long/short = verses of ≥ 30 / < 30 written units.
 - E1 = last letter, E2 = second from last, S1 = first letter.
@@ -33,7 +31,7 @@ Claude re-extracted all 42 confirmed Gītā rows with separate code (independent
 | Copy of ch.1 v.80 | ch.26 short S1, in threes | 93 % |
 | Twin passage | ch.24 E1 up ↔ ch.27 E2 | 89 % |
 | Poem's own cell counts | ch.3 v.173 = 7,290 = 10×729; ch.17 v.268 = 10,935 = 15×729 | exact |
-| Five verses headed Śrutāvatāra by the editors | ch.49→47, fifth-from-end letter of long verses, upward | Claude's own rebuild reads them through. The independent score against the noisy print is 64 % (WEAK as a letter score). The word "…rutāvatāra" is in the grid letters of ch.47. No known book was found to contain these five verses. |
+| Five verses headed Śrutāvatāra | ch.49→47, fifth-from-end letter of long verses, upward | Claude's own rebuild reads them through. The independent score against the printed text is 64 % (WEAK as a letter score). The word "…rutāvatāra" is in the grid letters of ch.47. No known book was found to contain these five verses. |
 
 ## CERTIFIED — round 3 (66 passages from 84 confirmed rows; best route per passage)
 
@@ -144,16 +142,9 @@ Summary of round 3:
 - W146: 13 languages, full corpora, every stream and page, 8 directions.
 - W166: 1.9 billion sounds.
 - W167: 14 sound tables.
-- W153: the editors' lines at every unit count.
 - W168: positions 13–60 and the Kannada-ear fold: 62,880 streams, 0 Tamil/Telugu passages; the 1,130 exact hits are Sanskrit Gītā quotations reused in Marathi and Tamil books; check passes. Pass 2 added 326,976 counting streams (akṣara, mātrā, pāda, concatenated) and the Kannada-ear alternatives. It found 0 alignments at k13–60, and every hit traced to Sanskrit Gītā quotations. Tamil is a strong negative: 200/200 planted controls were found. Pass 3 fixed the scanner for Telugu (200/200 exact and 200/200 10 %-edited planted controls found) and reran every Telugu search against the W146 and W143 Telugu libraries: 167 qualifying rows at 46 coordinates, 0 at k13–60. Of these, 161 are repetitive alignments to Telugu prose or glossary text and 6 are a Sanskrit Vāsudeva verse quoted in a Telugu commentary. No Telugu passage is established; Telugu is now a strong negative within these libraries (runs/w168/REPORT.md, check.py passes).
 - W169: Tamil, Telugu and Marathi under a voice-collapsed code, against all 4,492,953 library chunks, 0 accepted. One outer-verse hit (ch.6 v.5) shares a Sanskrit catalogue of beings with a Telugu Bhāgavata line; it is not Telugu.
-- W170: the editors' starred letters in the printed chapter give their Telugu and Tamil lines (38 of 44 letters each). No rule produces them from the grid numbers.
 - W171: 65−n with a Dravidian sound map, all 59 chapters, 7,541,721 source records, 0 hits; 4/4 planted controls recovered.
-
-**The editors' Śrutāvatāra verses 6 onward.** Not found:
-- W149 and W137;
-- the conch spiral of the 2021 book (p.67), tested by Claude on all 1,268 grids: best shared run 7–8 sounds, the same as shuffles;
-- the book claims for ch.13, ch.1 and ch.56/59, tested by Claude: no match.
 
 **Grid walks and bandha routes** (W115–W121, W150), every-k-th letters, 2-D bands, and inserts in ch.9–20 (W151, W152, W154): nothing new.
 

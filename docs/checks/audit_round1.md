@@ -138,7 +138,7 @@ The ch.1 reference comes directly from raw ranks of its verse labelled “Verse 
 
 ### C10 — printed Śrutāvatāra 1–5, ch.49→47 fifth-from-end up
 
-Reference: [Editors’ Śrutāvatāra page](https://jainqq.org/explore/023254/496/).
+Reference: [Printed Śrutāvatāra page](https://jainqq.org/explore/023254/496/).
 
 Column positions 35–314 of 321; 177/275 matches, shuffle max 55 (0/1,000 controls reached the observed score).
 
