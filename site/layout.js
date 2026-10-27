@@ -11,3 +11,8 @@ window.SITE_REPO = 'https://github.com/snrahulsn/siribhoovalaya';
 })();
 // Links that do not exist yet: fill these in when they do.
 window.SITE_LINKS = { github: "https://github.com/snrahulsn/siribhoovalaya", youtube: "RFuBJIJSoBk", howto: "" };
+// Page-visit counter (GoatCounter: no cookies, private dashboard). Not counted on local previews.
+if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+  const s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
+  s.dataset.goatcounter = 'https://siribhoovalaya.goatcounter.com/count'; document.head.appendChild(s);
+}
