@@ -6,11 +6,12 @@
 <title>How it's read · Siribhūvalaya</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 <style>
 .top{padding-block:56px 36px}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-@media (max-width:900px){.steps{grid-template-columns:1fr}}
+@media (max-width:900px){.steps{grid-template-columns:minmax(0,1fr)}}
+.stp{min-width:0}.stp .fig{max-width:100%;overflow-x:auto}
 .stp{display:flex;flex-direction:column;gap:14px;padding:26px;border:1px solid var(--line);border-radius:10px;min-height:300px}
 .stp .k{font-family:var(--mono);font-size:13px;color:var(--accent)}
 .stp h3{font-size:20px;margin:0}
@@ -33,6 +34,7 @@
 .g27 .gc{margin-right:6px} .g27 .gr{grid-column:1/-1;height:4px}
 .g27 div.on{background:var(--accent-soft);color:var(--accent)}
 .g27 div.cur{background:var(--accent);color:var(--on-accent);font-weight:500}
+@media (max-width:700px){.walk,.walk>*,.panel,.gridbox{min-width:0;max-width:100%}.g27{width:100%;grid-template-columns:repeat(27,minmax(0,1fr));gap:1px}.g27 div{width:auto;height:auto;aspect-ratio:1;font-size:6px;border-radius:1px}.g27 .gc{margin-right:3px}}
 .gridbox{overflow-x:auto}
 .panel{display:grid;gap:26px;position:sticky;top:90px}
 .cap{font-size:13px;color:var(--muted);margin-bottom:8px}

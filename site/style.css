@@ -86,3 +86,11 @@ a.card:hover{border-color:var(--accent)}
 
 .soon{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px dashed var(--line);border-radius:999px;font-size:14px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* Phones: one compact header row; the nav scrolls sideways instead of wrapping, and the header is not sticky. */
+@media (max-width:700px){
+  .site-head{position:static}
+  .site-head .frame{flex-wrap:nowrap;flex-direction:column;align-items:stretch;gap:6px;padding-block:10px}
+  .site-nav{flex-wrap:nowrap;overflow-x:auto;gap:16px;font-size:14px;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .site-nav::-webkit-scrollbar{display:none}
+  .site-nav a.nav-cta{padding:6px 12px}
+}

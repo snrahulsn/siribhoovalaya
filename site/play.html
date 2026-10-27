@@ -8,12 +8,11 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 <style>
 .top{padding-block:56px 28px}
 .play{display:grid;grid-template-columns:minmax(0,auto) minmax(300px,1fr);gap:40px;align-items:start;padding-bottom:72px}
 @media (max-width:1080px){.play{grid-template-columns:1fr}}
-@media (max-width:640px){.board{--cs:calc((100vw - 120px) / 27);--gp:2px;--bg9:8px;padding:8px}}
 .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
 .bar label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
 select{font:inherit;font-size:15px;min-height:40px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
@@ -38,6 +37,7 @@ select{font:inherit;font-size:15px;min-height:40px;padding:0 10px;border:1px sol
 .g27 div.pop{animation:pop .2s cubic-bezier(.3,1.6,.5,1)}
 @keyframes pop{0%{transform:scale(.7)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.g27 div{transition:none}.g27 div.pop{animation:none}}
+@media (max-width:640px){.board{--cs:calc((100vw - 96px) / 27);--gp:1px;--bg9:7px;padding:6px;display:block;width:max-content;max-width:100%}.g27 div{border-radius:2px}}
 .hint{font-size:14px;color:var(--muted);margin:10px 0 0;max-width:640px}
 .panel{display:grid;gap:22px;position:sticky;top:84px}
 @media (max-width:1080px){.panel{position:static}}
