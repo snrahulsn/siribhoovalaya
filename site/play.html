@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Try it out · Siribhūvalaya</title>
+<meta name="description" content="Draw a route across a real page of the Siribhūvalaya, mark a stretch of letters, and see whether it reads as Kannada or as chance.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+.top{padding-block:56px 28px}
+.play{display:grid;grid-template-columns:minmax(0,auto) minmax(300px,1fr);gap:40px;align-items:start;padding-bottom:72px}
+@media (max-width:1080px){.play{grid-template-columns:1fr}}
+@media (max-width:640px){.board{--cs:calc((100vw - 120px) / 27);--gp:2px;--bg9:8px;padding:8px}}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.bar label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+select{font:inherit;font-size:15px;min-height:40px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.shapes{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.shape{font:inherit;font-size:14px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.shape:hover{border-color:var(--fg)}
+.shape[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.board{--cs:min(22px,calc((100vw - 240px) / 27));--gp:5px;--bg9:14px;touch-action:none;user-select:none;-webkit-user-select:none;display:inline-block;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--tile)}
+.board-in{position:relative;width:max-content}
+.g27{display:grid;grid-template-columns:repeat(9,var(--cs)) calc(var(--bg9) - 2 * var(--gp)) repeat(9,var(--cs)) calc(var(--bg9) - 2 * var(--gp)) repeat(9,var(--cs));gap:var(--gp);width:max-content}
+.route{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.route polyline{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.g27 div{width:var(--cs);height:var(--cs);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:calc(var(--cs) * .42);background:var(--bg);color:var(--muted);border-radius:5px;cursor:pointer;box-shadow:0 0 0 1px var(--line);transition:transform .12s cubic-bezier(.3,1.6,.5,1),background .15s,color .15s}
+.g27.kn div{font-family:var(--kn);font-size:calc(var(--cs) * .52)}
+.g27 .gr{grid-column:1/-1;height:calc(var(--bg9) - var(--gp));background:none;box-shadow:none;cursor:default}
+@media (hover:hover){.g27 div:not(.gr):hover{transform:scale(1.12);box-shadow:0 0 0 1.5px var(--accent);color:var(--fg);z-index:1}}
+.g27 div:not(.gr):active{transform:scale(.88)}
+.g27 div.on{background:var(--accent);color:var(--on-accent);box-shadow:none}
+.g27 div.trail{background:color-mix(in srgb,var(--accent) 30%,var(--bg));color:var(--accent);box-shadow:none}
+.g27 div.mk{background:var(--accent);color:var(--on-accent);box-shadow:none}
+.g27 div.head{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent);z-index:1}
+.g27 div.pop{animation:pop .2s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.7)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.g27 div{transition:none}.g27 div.pop{animation:none}}
+.hint{font-size:14px;color:var(--muted);margin:10px 0 0;max-width:640px}
+.panel{display:grid;gap:22px;position:sticky;top:84px}
+@media (max-width:1080px){.panel{position:static}}
+.cap{font-size:13px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;gap:10px}
+.text{font-family:var(--kn);font-size:22px;line-height:1.75;max-height:12.5em;overflow-y:auto;word-break:break-all;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--tile)}
+.text:empty::before{content:"Pick a shape, or click cells on the page.";font-family:var(--sans);font-size:15px;color:var(--faint)}
+.text span{cursor:pointer;border-radius:3px}
+.text span:hover{background:var(--accent-soft)}
+.text span.sel{background:var(--accent);color:var(--on-accent)}
+.text span.w{box-shadow:inset 0 -2px 0 var(--accent)}
+.ro{font-family:var(--mono);font-size:13px;color:var(--muted);word-break:break-all;margin-top:8px;max-height:5em;overflow-y:auto}
+.result{border:1px solid var(--line);border-radius:10px;padding:18px}
+.result[hidden]{display:none}
+.verdict{font-size:19px;font-weight:600;line-height:1.35;margin:0 0 6px}
+.verdict.yes{color:var(--accent)}
+.nums{display:flex;gap:22px;flex-wrap:wrap;margin:12px 0}
+.nums div{display:flex;flex-direction:column}
+.nums b{font-family:var(--mono);font-size:24px;font-weight:500}
+.nums span{font-size:13px;color:var(--muted)}
+.hist{width:100%;height:auto;display:block}
+.hist .b{fill:var(--line)} .hist .you{stroke:var(--accent);stroke-width:2} .hist text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.words{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;max-height:14em;overflow-y:auto}
+.words li{display:flex;gap:10px;font-size:14px;border-top:1px solid var(--line);padding-top:6px}
+.words .kn{font-size:17px;white-space:nowrap}
+.words .g{color:var(--muted)}
+.finds{list-style:none;margin:0;padding:0;font-size:14px}
+.finds li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:6px 0}
+.finds li:last-child{border-bottom:1px solid var(--line)}
+.finds a{text-decoration:none}
+.how{font-size:14px;color:var(--muted)}
+.how summary{cursor:pointer;color:var(--fg)}
+</style>
+</head>
+<body>
+<main>
+  <div class="frame top">
+    <p class="eyebrow">Try it out</p>
+    <h1>Try it out</h1>
+    <p class="lede" style="max-width:760px">Every page of the poem is 729 numbers. Draw a route across one, or try a shape. We read the letters along your route and check them against a Kannada dictionary, and against 200 shuffles of the same letters.</p>
+  </div>
+
+  <div class="frame play">
+    <div>
+      <div class="bar">
+        <label for="ch">Chapter <select id="ch"></select></label>
+        <label for="pg">Page <select id="pg"></select></label>
+        <button class="btn" id="view" type="button" aria-pressed="false">Show letters</button>
+        <button class="btn" id="clear" type="button">Clear</button>
+        <button class="btn" id="snd" type="button" aria-pressed="true">Sound on</button>
+      </div>
+      <div class="shapes" id="shapes" role="group" aria-label="Shapes">
+        <button class="shape" data-s="draw" type="button">Draw your own</button>
+        <button class="shape" data-s="rows" type="button">Rows</button>
+        <button class="shape" data-s="snake" type="button">Snake</button>
+        <button class="shape" data-s="cols" type="button">Columns</button>
+        <button class="shape" data-s="diag" type="button">Diagonals</button>
+        <button class="shape" data-s="spiral" type="button">Spiral in</button>
+        <button class="shape" data-s="spiralout" type="button">Spiral out</button>
+        <button class="shape" data-s="knight" type="button">Knight's move</button>
+        <button class="shape" data-s="wheel" type="button">The poem's route</button>
+      </div>
+      <div class="board"><div class="board-in"><div class="g27" id="g27" role="grid" aria-label="A 27 by 27 page of numbers"></div><svg class="route" id="route" aria-hidden="true"><polyline id="line"/></svg></div></div>
+      <p class="hint" id="hint">Drag across the tiles. Your line snaps to rows, columns and diagonals. Drag back, or tap the last tile, to undo.</p>
+    </div>
+
+    <aside class="panel" aria-live="polite">
+      <div>
+        <div class="cap"><span>Letters along your route</span><span id="count"></span></div>
+        <div class="text" id="text"></div>
+        <div class="ro" id="ro"></div>
+        <p class="hint" style="margin-top:8px">To mark a stretch, click its first letter, then its last.</p>
+      </div>
+      <div class="btn-row"><button class="btn primary" id="check" type="button" disabled>Check</button><span class="small muted" id="status" style="align-self:center"></span></div>
+      <div class="result" id="result" hidden>
+        <p class="verdict" id="verdict"></p>
+        <p class="small muted" id="vline" style="margin:0"></p>
+        <div class="nums"><div><b id="you">–</b><span>of letters in words</span></div><div><b id="shf">–</b><span>shuffles, on average</span></div><div><b id="beat">–</b><span>shuffles beaten</span></div></div>
+        <svg class="hist" id="hist" viewBox="0 0 320 84" aria-label="How the shuffles scored"></svg>
+        <ul class="words" id="words"></ul>
+      </div>
+      <div id="findsbox" hidden>
+        <div class="cap"><span>Your best checks</span></div>
+        <ul class="finds" id="finds"></ul>
+      </div>
+      <details class="how">
+        <summary>How the check works</summary>
+        <p style="margin-top:10px">Each number is a sound. We join the sounds into letters, then find the Kannada words of six sounds or more that fit, without overlapping. The score is the share of sounds that fall inside words.</p>
+        <p>Then we shuffle the same letters 200 times and score each shuffle. Real text in reading order beats every shuffle. Letters in a random order do not. The poem's own route beats them all.</p>
+        <p>Dictionary: the Alar Kannada dictionary by V. Krishna (ODbL) and Wiktionary Kannada (CC BY-SA), 114,365 words.</p>
+      </details>
+    </aside>
+  </div>
+</main>
+<script src="layout.js?v=6"></script>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const FILES = [[1, 8], [9, 20], [21, 33], [34, 46], [47, 59]];
+  const IND = {1:'ಅ',2:'ಆ',3:'ಆ',4:'ಇ',5:'ಈ',6:'ಈ',7:'ಉ',8:'ಊ',9:'ಊ',10:'ಋ',11:'ೠ',12:'ೠ',16:'ಎ',17:'ಏ',18:'ಏ',19:'ಐ',20:'ಐ',21:'ಐ',22:'ಒ',23:'ಓ',24:'ಓ',25:'ಔ',26:'ಔ',27:'ಔ'};
+  const SIGN = {1:'',2:'ಾ',3:'ಾ',4:'ಿ',5:'ೀ',6:'ೀ',7:'ು',8:'ೂ',9:'ೂ',10:'ೃ',11:'ೄ',12:'ೄ',16:'ೆ',17:'ೇ',18:'ೇ',19:'ೈ',20:'ೈ',21:'ೈ',22:'ೊ',23:'ೋ',24:'ೋ',25:'ೌ',26:'ೌ',27:'ೌ'};
+  let SYM = {}, cache = {}, sheets = [], cells = [], order = [], path = [], mark = null, shape = null, dict = null, drawing = false, showKn = false;
+  const g = $('g27'), els = [];
+
+  // Board: 27 × 27 cells, a small gap after every ninth row and column.
+  for (let r = 0; r < 27; r++) {
+    for (let c = 0; c < 27; c++) { const d = document.createElement('div'); d.dataset.i = r * 27 + c; d.style.gridColumn = String(c + 1 + Math.floor(c / 9)); g.appendChild(d); els.push(d); }
+    if (r % 9 === 8 && r < 26) { const s = document.createElement('div'); s.className = 'gr'; g.appendChild(s); }
+  }
+
+  // Written units: a consonant joins the vowel after it; ṃ and ḥ join the unit before.
+  // Codes 13–15 are written ಳ, ಳು, ಳೂ, as on the reading page.
+  const isV = n => n >= 1 && n <= 27 && (n < 13 || n > 15), isC = n => n === 13 || (n >= 28 && n <= 60);
+  function units(codes) {
+    const out = []; let pend = null;
+    for (const n of codes) {
+      if (n === 14 || n === 15) { if (pend) out.push([pend]); pend = null; out.push([n]); }
+      else if (isV(n)) { out.push(pend ? [pend, n] : [n]); pend = null; }
+      else if (isC(n)) { if (pend) out.push([pend]); pend = n; }
+      else if (n === 61 || n === 62) { if (pend) { out.push([pend]); pend = null; } if (out.length) out[out.length - 1] = out[out.length - 1].concat(n); else out.push([n]); }
+      else { if (pend) { out.push([pend]); pend = null; } out.push([0]); }
+    }
+    if (pend) out.push([pend]);
+    return out;
+  }
+  const base = n => n === 13 ? 'ಳ' : (SYM[n] ? SYM[n][0] : '?').replace('್', '');
+  function unitKn(u) {
+    let s = '', k = 0;
+    if (isC(u[0])) { s = base(u[0]); k = 1; if (isV(u[1])) { s += SIGN[u[1]]; k = 2; } else s += '್'; }
+    else if (isV(u[0])) { s = IND[u[0]]; k = 1; }
+    else if (u[0] === 14 || u[0] === 15) { s = SYM[u[0]][0]; k = 1; }
+    for (; k < u.length; k++) s += u[k] === 61 ? 'ಂ' : u[k] === 62 ? 'ಃ' : '·';
+    return s || '·';
+  }
+  const unitRo = u => u.map(n => n === 0 ? '·' : (SYM[n] ? SYM[n][1] : '?')).join('');
+
+  function cellText(n) { if (!showKn) return n ? String(n) : '·'; if (!n) return '·'; return SYM[n] ? SYM[n][0].replace(/(.)\1+$/, '$1') : '?'; }
+  function paintCells() { els.forEach((e, i) => { e.textContent = cellText(cells[i]); }); }
+
+  // Shapes: each returns the 729 cell indices in reading order.
+  const RC = (r, c) => r * 27 + c;
+  const SHAPES = {
+    rows: () => [...Array(729).keys()],
+    snake: () => { const p = []; for (let r = 0; r < 27; r++) for (let k = 0; k < 27; k++) p.push(RC(r, r % 2 ? 26 - k : k)); return p; },
+    cols: () => { const p = []; for (let c = 0; c < 27; c++) for (let r = 0; r < 27; r++) p.push(RC(r, c)); return p; },
+    diag: () => { const p = []; for (let s = 0; s <= 52; s++) for (let r = 0; r < 27; r++) { const c = s - r; if (c >= 0 && c < 27) p.push(RC(r, c)); } return p; },
+    spiral: () => { const p = []; let t = 0, b = 26, l = 0, rt = 26; while (t <= b && l <= rt) { for (let c = l; c <= rt; c++) p.push(RC(t, c)); t++; for (let r = t; r <= b; r++) p.push(RC(r, rt)); rt--; if (t <= b) { for (let c = rt; c >= l; c--) p.push(RC(b, c)); b--; } if (l <= rt) { for (let r = b; r >= t; r--) p.push(RC(r, l)); l++; } } return p; },
+    spiralout: () => SHAPES.spiral().reverse(),
+    // Knight's tour by Warnsdorff's rule from the top-left corner.
+    knight: () => { const seen = new Uint8Array(729), mv = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]], p = [];
+      const nb = (r, c) => mv.map(([a, b]) => [r + a, c + b]).filter(([x, y]) => x >= 0 && x < 27 && y >= 0 && y < 27 && !seen[RC(x, y)]);
+      let r = 0, c = 0; for (let k = 0; k < 729; k++) { seen[RC(r, c)] = 1; p.push(RC(r, c)); const n = nb(r, c); if (!n.length) break; n.sort((a, b) => nb(a[0], a[1]).length - nb(b[0], b[1]).length); [r, c] = n[0]; } return p; },
+    wheel: () => [...Array(729).keys()].sort((a, b) => order[a] - order[b])
+  };
+
+  function setShape(s) {
+    shape = s; mark = null;
+    document.querySelectorAll('.shape').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === s)));
+    path = s === 'draw' ? [] : SHAPES[s]();
+    $('hint').textContent = s === 'draw' ? 'Drag across the tiles. Your line snaps to rows, columns and diagonals. Drag back, or tap the last tile, to undo.' : 'This shape reads all 729 cells. Click "Draw your own" to make your own route.';
+    update();
+  }
+
+  function update() {
+    els.forEach(e => e.classList.remove('on', 'mk', 'head'));
+    sweep();
+    if (shape === 'draw' && path.length) els[path[path.length - 1]].classList.add('head');
+    drawLine();
+    const us = units(path.map(i => cells[i]));
+    curUnits = us;
+    const t = $('text'); t.textContent = '';
+    us.forEach((u, k) => { const s = document.createElement('span'); s.textContent = unitKn(u); s.dataset.k = k; t.appendChild(s); });
+    $('ro').textContent = us.map(unitRo).join(' ');
+    $('count').textContent = path.length ? path.length + ' cells · ' + us.length + ' letters' : '';
+    $('check').disabled = us.length < 8;
+    $('result').hidden = true; $('status').textContent = '';
+    showMark();
+  }
+  let curUnits = [], sweepId = 0;
+
+  // Shapes do not fill the board: a short trail runs once along the route so its shape can be seen, then clears.
+  // A drawn route stays lit.
+  function sweep() {
+    const id = ++sweepId, p = path.slice();
+    els.forEach(e => e.classList.remove('trail'));
+    if (shape === 'draw') { p.forEach(i => els[i].classList.add('on')); return; }
+    if (!animate) return;
+    let k = 0; const step = Math.ceil(p.length / 90), len = 40;
+    (function frame() {
+      if (id !== sweepId) return;
+      for (let n = 0; n < step && k < p.length + len; n++, k++) { if (k < p.length) els[p[k]].classList.add('trail'); if (k - len >= 0) els[p[k - len]].classList.remove('trail'); }
+      if (k < p.length + len) setTimeout(frame, 16);
+    })();
+  }
+  let animate = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showMark() {
+    const sp = $('text').children;
+    for (const s of sp) s.classList.remove('sel');
+    els.forEach(e => e.classList.remove('mk'));
+    if (!mark) return;
+    const [a, b] = mark[1] === undefined ? [mark[0], mark[0]] : [Math.min(...mark), Math.max(...mark)];
+    for (let k = a; k <= b; k++) sp[k] && sp[k].classList.add('sel');
+    // Every code belongs to one letter, in order, so letter k covers the next u.length cells of the route.
+    let off = 0; curUnits.forEach((u, k) => { if (k >= a && k <= b) for (let j = 0; j < u.length; j++) els[path[off + j]].classList.add('mk'); off += u.length; });
+  }
+  $('text').addEventListener('click', e => {
+    const k = e.target.dataset && e.target.dataset.k; if (k === undefined) return;
+    const n = Number(k);
+    if (!mark || mark[1] !== undefined) mark = [n]; else mark = [mark[0], n];
+    $('result').hidden = true; showMark();
+    $('check').textContent = mark && mark[1] !== undefined ? 'Check the marked part' : 'Check';
+  });
+
+  // Drawing with mouse, pen or finger. Each move snaps to a row, column or diagonal from the route's head,
+  // and every tile on the way is added, so a fast drag never skips one. Dragging back over the previous tile undoes.
+  const cellAt = (e, inner) => {
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    if (!el || el.parentElement !== g || el.dataset.i === undefined || el.classList.contains('gr')) return null;
+    if (inner) { const r = el.getBoundingClientRect(), k = e.pointerType === 'touch' ? 0.3 : 0.38;
+      if (Math.abs(e.clientX - (r.left + r.width / 2)) > r.width * k || Math.abs(e.clientY - (r.top + r.height / 2)) > r.height * k) return null; }
+    return Number(el.dataset.i);
+  };
+  let audio = null, soundOn = true;
+  function feel() {
+    if (navigator.vibrate && navigator.userActivation && navigator.userActivation.hasBeenActive) navigator.vibrate(6);
+    if (!soundOn) return;
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      const o = audio.createOscillator(), v = audio.createGain(), t = audio.currentTime;
+      o.type = 'triangle'; o.frequency.setValueAtTime(1300 + Math.min(path.length, 60) * 8, t);
+      v.gain.setValueAtTime(0.0001, t); v.gain.exponentialRampToValueAtTime(0.05, t + 0.004); v.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+      o.connect(v).connect(audio.destination); o.start(t); o.stop(t + 0.06);
+    } catch (e) {}
+  }
+  function add(i) { path.push(i); feel(); const el = els[i]; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  function stroke(t) {
+    if (t === null) return false;
+    const h = path[path.length - 1];
+    if (h === undefined) { add(t); return true; }
+    if (t === h) return false;
+    const hr = Math.floor(h / 27), hc = h % 27, dr = Math.floor(t / 27) - hr, dc = t % 27 - hc;
+    let sr = Math.sign(dr), sc = Math.sign(dc);
+    if (Math.abs(dc) > 2 * Math.abs(dr)) sr = 0; else if (Math.abs(dr) > 2 * Math.abs(dc)) sc = 0;
+    const n = sr && sc ? Math.min(Math.abs(dr), Math.abs(dc)) : Math.max(Math.abs(dr), Math.abs(dc));
+    let changed = false, r = hr, c = hc;
+    for (let k = 0; k < n; k++) {
+      r += sr; c += sc; if (r < 0 || r > 26 || c < 0 || c > 26) break;
+      const i = RC(r, c);
+      if (i === path[path.length - 2]) { path.pop(); feel(); changed = true; continue; }
+      if (path.includes(i)) break;
+      add(i); changed = true;
+    }
+    return changed;
+  }
+  function touch(i, start) {
+    if (i === null) return;
+    if (shape !== 'draw') setShape('draw');
+    if (start && i === path[path.length - 1]) { path.pop(); feel(); mark = null; update(); return; }
+    if (stroke(i)) { mark = null; update(); }
+  }
+  g.addEventListener('pointerdown', e => { const i = cellAt(e); if (i === null) return; e.preventDefault(); drawing = true; g.setPointerCapture(e.pointerId); touch(i, true); });
+  g.addEventListener('pointermove', e => { if (drawing) touch(cellAt(e, true), false); });
+  ['pointerup', 'pointercancel'].forEach(t => g.addEventListener(t, () => { drawing = false; }));
+  $('snd').addEventListener('click', () => { soundOn = !soundOn; $('snd').textContent = soundOn ? 'Sound on' : 'Sound off'; $('snd').setAttribute('aria-pressed', String(soundOn)); });
+
+  // The drawn route as a line through tile centres.
+  function drawLine() {
+    const pts = shape === 'draw' ? path.map(i => (els[i].offsetLeft + els[i].offsetWidth / 2) + ',' + (els[i].offsetTop + els[i].offsetHeight / 2)).join(' ') : '';
+    $('line').setAttribute('points', pts);
+  }
+
+  // Scoring: sounds folded as in the dictionary; best non-overlapping cover by words of 6+ sounds.
+  const chr = x => String.fromCharCode(0x100 + x);
+  function soundString(us) { let s = ''; for (const u of us) for (const n of u) s += chr(dict.fold[n] || 0); return s; }
+  function cover(s, keep) {
+    const n = s.length, best = new Int32Array(n + 1), from = keep ? new Int32Array(n + 1) : null;
+    for (let i = 1; i <= n; i++) {
+      best[i] = best[i - 1]; if (keep) from[i] = -1;
+      for (let L = 6; L <= dict.maxL && L <= i; L++) { if (best[i - L] + L > best[i] && dict.set.has(s.substr(i - L, L))) { best[i] = best[i - L] + L; if (keep) from[i] = L; } }
+    }
+    let words = [];
+    if (keep) { let i = n; while (i > 0) { if (from[i] > 0) { words.push([i - from[i], from[i]]); i -= from[i]; } else i--; } words.reverse(); }
+    const real = s.replace(/[\u0100\u013f\u0140]/g, '').length || 1;
+    return { score: best[n] / real, words };
+  }
+  let seed = 1;
+  const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x80000000; };
+  function shuffled(a) { const z = a.slice(); for (let i = z.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [z[i], z[j]] = [z[j], z[i]]; } return z; }
+  const pct = x => Math.round(x * 100) + '%';
+
+  async function check() {
+    if (!dict) { $('status').textContent = 'Loading the dictionary…';
+      try { await dictReady; } catch (e) { $('status').textContent = 'Could not load the dictionary. Reload the page to try again.'; return; } }
+    let us = curUnits, a = 0;
+    if (mark && mark[1] !== undefined) { a = Math.min(...mark); us = curUnits.slice(a, Math.max(...mark) + 1); }
+    if (us.length < 8) { $('status').textContent = 'Mark at least 8 letters.'; return; }
+    $('status').textContent = 'Checking…'; $('check').disabled = true;
+    await new Promise(r => setTimeout(r, 20));
+    const real = cover(soundString(us), true), scores = [];
+    seed = 20261027;
+    for (let k = 0; k < 200; k++) { scores.push(cover(soundString(shuffled(us)), false).score); if (k % 25 === 24) await new Promise(r => setTimeout(r, 0)); }
+    const beat = scores.filter(x => x < real.score).length, mean = scores.reduce((x, y) => x + y, 0) / 200, top = Math.max(...scores);
+    const yes = beat === 200 && real.score > 0;
+    $('verdict').textContent = yes ? 'This reads as Kannada.' : beat >= 190 ? 'Better than most shuffles, but not all.' : 'This looks like chance.';
+    $('verdict').className = 'verdict' + (yes ? ' yes' : '');
+    $('vline').textContent = yes ? 'Your letters beat every one of 200 shuffles.' : beat >= 190 ? 'Some shuffles score as well. It could be luck.' : 'Shuffled letters find as many words as yours do.';
+    $('you').textContent = pct(real.score); $('shf').textContent = pct(mean); $('beat').textContent = beat + ' of 200';
+    drawHist(scores, real.score);
+    // Underline the words found and list them with meanings.
+    const sp = $('text').children; for (const s of sp) s.classList.remove('w');
+    const lens = us.map(u => u.length), starts = []; let acc = 0; lens.forEach(l => { starts.push(acc); acc += l; });
+    const ul = $('words'); ul.textContent = '';
+    const seen = new Set(), ss = soundString(us), ids = [];
+    real.words.forEach(([p, L]) => {
+      for (let k = 0; k < us.length; k++) if (starts[k] < p + L && starts[k] + lens[k] > p) sp[a + k] && sp[a + k].classList.add('w');
+      const i = dict.byS.get(ss.substr(p, L)); if (i !== undefined) ids.push(i);
+    });
+    Promise.all(ids.map(wordAt)).then(es => es.forEach(([kn, gl]) => { if (!kn || seen.has(kn)) return; seen.add(kn);
+      const li = document.createElement('li'); li.innerHTML = '<span class="kn"></span><span class="g"></span>';
+      li.children[0].textContent = kn; li.children[1].textContent = (gl || '').split(/ - |;/)[0].replace(/[\s,(]+$/, ''); ul.appendChild(li);
+    })).catch(() => {});
+    $('result').hidden = false; $('status').textContent = ''; $('check').disabled = false;
+    saveFind(real.score, beat, us.length);
+  }
+
+  function drawHist(scores, you) {
+    const hi = Math.max(you, ...scores, 0.05) * 1.08, bins = new Array(32).fill(0);
+    scores.forEach(x => bins[Math.min(31, Math.floor(x / hi * 32))]++);
+    const m = Math.max(...bins) || 1; let s = '';
+    bins.forEach((b, k) => { const h = b / m * 60; if (b) s += `<rect class="b" x="${k * 10 + 1}" y="${66 - h}" width="8" height="${h}"/>`; });
+    const x = you / hi * 320;
+    s += `<line class="you" x1="${x}" x2="${x}" y1="0" y2="66"/><text x="${x > 250 ? x - 6 : x + 6}" y="10" text-anchor="${x > 250 ? 'end' : 'start'}">you · ${pct(you)}</text><text x="0" y="80">0%</text><text x="${x > 250 ? x - 6 : 320}" y="80" text-anchor="end">shuffles</text>`;
+    $('hist').innerHTML = s;
+  }
+
+  function saveFind(score, beat, n) {
+    try {
+      const key = 'siri-play-finds', all = JSON.parse(localStorage.getItem(key) || '[]');
+      all.push({ ch: $('ch').value, pg: $('pg').value, shape, score, beat, n, marked: !!(mark && mark[1] !== undefined) });
+      all.sort((x, y) => y.beat - x.beat || y.score - x.score);
+      localStorage.setItem(key, JSON.stringify(all.slice(0, 8))); showFinds();
+    } catch (e) {}
+  }
+  const SHAPE_NAME = { draw: 'Your route', rows: 'Rows', snake: 'Snake', cols: 'Columns', diag: 'Diagonals', spiral: 'Spiral in', spiralout: 'Spiral out', knight: "Knight's move", wheel: "The poem's route" };
+  function showFinds() {
+    let all = []; try { all = JSON.parse(localStorage.getItem('siri-play-finds') || '[]'); } catch (e) {}
+    $('findsbox').hidden = !all.length; const ul = $('finds'); ul.textContent = '';
+    all.forEach(f => { const li = document.createElement('li'); li.innerHTML = '<span></span><span class="mono"></span>';
+      li.children[0].textContent = `Chapter ${f.ch}, page ${f.pg} · ${SHAPE_NAME[f.shape] || f.shape}${f.marked ? ', marked part' : ''}`;
+      li.children[1].textContent = `${pct(f.score)} · beat ${f.beat}/200`; ul.appendChild(li); });
+  }
+
+  async function loadChapter(ch) {
+    const f = FILES.find(([a, b]) => ch >= a && ch <= b), name = `data/grids_${f[0]}_${f[1]}.json`;
+    if (!cache[name]) cache[name] = fetch(name).then(r => r.json());
+    const rows = (await cache[name]).filter(r => r.chapter === ch), by = new Map();
+    rows.forEach(r => { if (!by.has(r.sheet)) by.set(r.sheet, []); by.get(r.sheet).push(r); });
+    sheets = [...by.entries()].sort((a, b) => a[0] - b[0]).map(([s, rs]) => ({ sheet: s, rows: rs.sort((a, b) => a.row - b.row) }));
+    $('pg').innerHTML = sheets.map((s, k) => `<option value="${s.sheet}">${k + 1}</option>`).join('');
+    loadSheet(0);
+  }
+  function loadSheet(k) {
+    const s = sheets[k]; cells = []; order = [];
+    s.rows.forEach(r => { cells.push(...r.cells.split(' ').map(Number)); order.push(...r.order.split(' ').map(Number)); });
+    paintCells(); setShape(shape || 'draw');
+  }
+
+  $('ch').innerHTML = Array.from({ length: 59 }, (_, k) => `<option value="${k + 1}">${k + 1}</option>`).join('');
+  $('ch').value = '15';
+  $('ch').addEventListener('change', () => loadChapter(Number($('ch').value)));
+  $('pg').addEventListener('change', () => loadSheet($('pg').selectedIndex));
+  $('shapes').addEventListener('click', e => { const s = e.target.dataset && e.target.dataset.s; if (s) setShape(s); });
+  $('clear').addEventListener('click', () => setShape('draw'));
+  $('view').addEventListener('click', () => { showKn = !showKn; g.classList.toggle('kn', showKn); $('view').textContent = showKn ? 'Show numbers' : 'Show letters'; $('view').setAttribute('aria-pressed', String(showKn)); paintCells(); });
+  $('check').addEventListener('click', check);
+  addEventListener('resize', drawLine);
+
+  // Scoring needs only the folded keys (play_keys.txt); a word's Kannada and meaning are fetched from its shard of 2,000 when found.
+  const dictReady = fetch('data/play_keys.txt').then(r => { if (!r.ok) throw new Error(r.status); return r.text(); }).then(t => {
+    const lines = t.split('\n'), fold = JSON.parse(lines[0]), byS = new Map(); let maxL = 6;
+    for (let k = 1; k < lines.length; k++) { byS.set(lines[k], k - 1); if (lines[k].length > maxL) maxL = lines[k].length; }
+    dict = { fold, set: byS, byS, maxL: Math.min(maxL, 40) };
+  });
+  dictReady.catch(() => {});
+  const shards = {};
+  const wordAt = i => { const n = Math.floor(i / 2000), f = String(n).padStart(2, '0');
+    if (!shards[n]) shards[n] = fetch(`data/play_words/${f}.txt`).then(r => r.text()).then(t => t.split('\n'));
+    return shards[n].then(L => (L[i % 2000] || '').split('\t')); };
+  fetch('data/symbols.json').then(r => r.json()).then(s => { s.forEach(x => { SYM[x.code] = [x.kannada, x.letter]; }); showFinds(); loadChapter(15); });
+})();
+</script>
+</body>
+</html>

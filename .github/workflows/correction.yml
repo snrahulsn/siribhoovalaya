@@ -1,0 +1,49 @@
+# A correction issue becomes a pull request that changes the text and the website data.
+# Issue text is untrusted: it is read only by scripts/apply_correction.py from the event file, never put in a shell line.
+name: Correction to pull request
+on:
+  issues:
+    types: [opened, edited, labeled]
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+concurrency:
+  group: correction-${{ github.event.issue.number }}
+  cancel-in-progress: true
+jobs:
+  propose:
+    if: contains(github.event.issue.labels.*.name, 'correction') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: apply
+        run: python scripts/apply_correction.py
+      - name: Open or update the pull request
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.apply.outputs.branch }}
+          TITLE: ${{ steps.apply.outputs.title }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add data/siribhuvalaya.csv data/corrections.csv site/data
+          git commit -m "$TITLE"
+          git push -f origin "$BRANCH"
+          if gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            gh pr edit "$BRANCH" --title "$TITLE" --body-file summary.md
+          else
+            gh pr create --head "$BRANCH" --title "$TITLE" --body-file summary.md --label correction
+            gh issue comment "$ISSUE" --body "Thank you. Your correction is now a pull request. It goes in once two readers, including a maintainer, approve it."
+          fi
+      - name: Explain what went wrong
+        if: failure() && hashFiles('summary.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: gh issue comment "$ISSUE" --body-file summary.md

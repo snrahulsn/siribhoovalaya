@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Chapter · Siribhūvalaya</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+.top{padding-block:48px 24px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.signbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 18px;border:1px solid var(--line);border-radius:10px;margin:24px 0 8px;font-size:15px}
+.signbar .btn{margin-left:auto}
+.verses{border-top:1px solid var(--line)}
+.v{display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid var(--line)}
+.v .n{font-family:var(--mono);font-size:15px;color:var(--accent)}
+.v .kn{font-size:21px;line-height:1.75;word-break:break-word}
+.v .ro{font-family:var(--mono);font-size:13px;color:var(--faint);margin-top:6px;word-break:break-word}
+.tr{margin-top:14px}
+.tr .tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.tr.best{padding:14px 16px;background:var(--accent-soft);border-radius:8px}
+.tr.best .tag{color:var(--accent)}
+.sug{display:grid;gap:10px;margin-top:14px}
+.s{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:15px}
+.s .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
+.s .acts{display:flex;gap:6px;flex-wrap:wrap}
+.s .btn{min-height:34px;padding:0 12px;font-size:13px}
+.s .btn.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.add{margin-top:12px}
+.add textarea{width:100%;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);min-height:84px;resize:vertical}
+.add .row{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.add .msg{font-size:13px;color:var(--muted)}
+.linkbtn{font:inherit;font-size:14px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:640px){.v{grid-template-columns:1fr;gap:6px}.s{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="frame top">
+    <p class="eyebrow"><a href="chapters.html" style="text-decoration:none">Read the poem</a> / Chapter <span id="crumb"></span></p>
+    <h1 id="title">Chapter</h1>
+    <p class="lede" id="summary" style="max-width:820px"></p>
+    <div class="pager"><a class="btn" id="prev" href="#">← Chapter</a><a class="btn" id="next" href="#">Chapter →</a></div>
+    <div class="signbar" id="signbar"></div>
+  </div>
+  <div class="frame"><div class="verses" id="verses"><p class="muted" style="padding-top:24px">Loading verses…</p></div></div>
+</main>
+<script src="layout.js?v=5"></script>
+<script>
+const c = Math.min(59, Math.max(1, parseInt(new URLSearchParams(location.search).get('c'), 10) || 1));
+const FILE = c <= 8 ? '1_8' : c <= 20 ? '9_20' : c <= 33 ? '21_33' : c <= 46 ? '34_46' : '47_59';
+const $ = id => document.getElementById(id);
+document.title = 'Chapter ' + c + ' · Siribhūvalaya';
+$('title').textContent = 'Chapter ' + c; $('crumb').textContent = c;
+$('prev').href = 'chapter.html?c=' + (c - 1); $('prev').textContent = '← Chapter ' + (c - 1);
+$('next').href = 'chapter.html?c=' + (c + 1); $('next').textContent = 'Chapter ' + (c + 1) + ' →';
+if (c === 1) $('prev').hidden = true; if (c === 59) $('next').hidden = true;
+fetch('data/chapters.json').then(r => r.json()).then(C => { $('summary').textContent = C[c - 1].s; });
+
+// Corrections are suggested as GitHub issues (a form with the chapter, verse and current text filled in).
+const REPO = window.SITE_REPO || 'https://github.com/snrahulsn/siribhoovalaya';
+const issue = v => REPO + '/issues/new?' + new URLSearchParams({template: 'correction.yml', title: `Correction: chapter ${c}, verse ${v.n}`,
+  where: `${c}.${v.n}`, current: [v.kannada, v.restored || v.words, v.translation].filter(Boolean).join('\n\n').slice(0, 3000)}).toString();
+$('signbar').innerHTML = `<span>Read Old Kannada? Every verse has a link to suggest a correction.</span>`;
+function render(VERSES) {
+  const box = $('verses'); box.textContent = '';
+  VERSES.forEach(v => {
+    const d = document.createElement('article'); d.className = 'v'; d.id = 'v' + v.n;
+    d.innerHTML = `<div class="n"><a href="#v${v.n}" title="Link to this verse" style="text-decoration:none">${v.n}</a></div><div>
+      <div class="kn"></div><div class="ro"></div>
+      <div class="tr"><span class="tag">Rough machine translation</span><div class="mt"></div></div>
+      <div class="add"><a class="linkbtn" target="_blank" rel="noopener">Suggest a correction</a></div></div>`;
+    d.querySelector('.kn').textContent = v.kannada || ''; d.querySelector('.ro').textContent = v.restored || v.words || '';
+    d.querySelector('.mt').textContent = v.translation || '';
+    d.querySelector('.add a').href = issue(v);
+    if (v.corrected_by && v.corrected_by.length) { const c = document.createElement('span'); c.className = 'small muted'; c.textContent = ' · Corrected by ' + v.corrected_by.map(u => '@' + u).join(', '); d.querySelector('.add').appendChild(c); }
+    box.appendChild(d);
+  });
+  if (location.hash) { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView(); }
+}
+fetch('data/verses_' + FILE + '.json').then(r => r.json()).then(V => render(V.filter(v => v.chapter === c)));
+</script>
+</body>
+</html>

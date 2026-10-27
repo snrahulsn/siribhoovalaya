@@ -1,0 +1,37 @@
+# Merge a correction once it has enough approving reviews, at least one of them from a maintainer, then redeploy the site.
+name: Merge approved corrections
+on:
+  pull_request_review:
+    types: [submitted]
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+env:
+  APPROVALS: 2   # approving reviews needed, counting the maintainer's
+jobs:
+  merge:
+    if: >-
+      github.event.review.state == 'approved' &&
+      startsWith(github.event.pull_request.head.ref, 'correction-') &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Latest review per reviewer; count approvals and maintainers among them (the PR author is a bot, so no self-approval).
+          gh api --paginate "repos/$REPO/pulls/$PR/reviews" --jq '.[] | [.user.login, .state] | @tsv' \
+            | awk -F'\t' '{s[$1]=$2} END {for (u in s) if (s[u]=="APPROVED") print u}' > approvers.txt
+          n=$(wc -l < approvers.txt); admin=0
+          while read -r u; do
+            p=$(gh api "repos/$REPO/collaborators/$u/permission" --jq .permission 2>/dev/null || echo none)
+            case "$p" in admin|maintain) admin=1;; esac
+          done < approvers.txt
+          echo "approvals=$n maintainer=$admin"
+          if [ "$n" -ge "$APPROVALS" ] && [ "$admin" -eq 1 ]; then
+            gh pr merge "$PR" --repo "$REPO" --squash --delete-branch
+            gh workflow run pages.yml --repo "$REPO" --ref main
+          fi

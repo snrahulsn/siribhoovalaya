@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Siribhūvalaya</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+.hero{border-bottom:1px solid var(--line)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:72px}
+.hero h1{font-size:clamp(44px,5.4vw,76px)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:40px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:26px;font-weight:500;line-height:1.1}
+.facts dd{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.hero-grid{margin:0;display:grid;gap:12px}
+.hg{display:grid;grid-template-columns:repeat(27,minmax(0,1fr));gap:2px;aspect-ratio:1}
+.hg div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:clamp(6px,.62vw,9px);background:var(--tile);color:var(--faint);border-radius:2px;transition:background .2s,color .2s}
+.hg div.on{background:var(--accent-soft);color:var(--accent)}
+.hg div.cur{background:var(--accent);color:var(--on-accent)}
+.hero-grid figcaption{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.hero-grid figcaption .kn{font-size:16px;color:var(--fg)}
+@media (max-width:960px){.hero-in{grid-template-columns:1fr;gap:40px;padding-block:48px}.facts{grid-template-columns:repeat(2,1fr)}}
+.film{padding-block:64px;border-bottom:1px solid var(--line)}
+.tl-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px}
+.strip{list-style:none;margin:0;padding:0 0 12px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:0;overflow-x:auto;border-top:2px solid var(--fg)}
+.strip li{padding:18px 20px 0 0;font-size:14px;line-height:1.5;color:var(--muted);position:relative}
+.strip li::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.strip .yr{display:block;font-family:var(--mono);font-size:15px;color:var(--accent);margin-bottom:6px}
+.strip b{color:var(--fg);font-weight:600}
+.start .steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.steps a{display:flex;flex-direction:column;gap:8px;height:100%;padding:24px;border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none;transition:border-color .15s,transform .15s}
+.steps a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.steps .sn{width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:500}
+.steps .st{font-size:19px;font-weight:600;margin-top:6px}
+.steps .sd{font-size:14px;color:var(--muted);line-height:1.5}
+.steps .sa{margin-top:auto;padding-top:10px;color:var(--accent);font-weight:500;font-size:15px}
+@media (max-width:900px){.start .steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.start .steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero"><div class="frame hero-in">
+    <div class="hero-text">
+      <p class="eyebrow">A poem written in numbers</p>
+      <h1>Siribhūvalaya</h1>
+      <p class="lede">A Kannada Jain poem, about 1,200 years old by its own account, written entirely in numbers. Each number from 1 to 64 stands for a sound; the numbers sit in 27 × 27 grids, 1,268 of them.</p>
+      <p>Only 33 of its 59 chapters were ever printed. In 2026 we used AI to turn all 59 from numbers back into Kannada letters, and to write a first English translation of every verse.</p>
+      <p>The letters are checked. The meaning is not: the English is rough, and the poem now needs people who read Old Kannada.</p>
+      <div class="btn-row" style="margin-top:28px"><a class="btn primary" href="#film">Watch the video</a><a class="btn" href="read.html">See how it's read</a><a class="btn" href="chapters.html">Read the poem</a></div>
+    </div>
+    <figure class="hero-grid" aria-label="Chapter 15, page 1, being read along its path">
+      <div class="hg" id="hg"></div>
+      <figcaption class="mono"><span>Chapter 15 · page 1</span><span id="hgsnd" class="kn"></span></figcaption>
+    </figure>
+  </div></section>
+
+  <section class="block"><div class="frame">
+    <div class="cards">
+      <a class="card" href="texts.html"><h3>Hidden texts</h3><p class="muted">One letter from each verse spells 64 verses of the Bhagavad Gītā and Jain texts.</p><span class="go">Open →</span></a>
+      <a class="card" href="chapters.html"><h3>Read the poem</h3><p class="muted">All 59 chapters in Kannada letters, each verse with its English draft.</p><span class="go">Open →</span></a>
+      <a class="card" href="play.html"><h3>Try it out</h3><p class="muted">Draw your own route across a real page and see if it reads.</p><span class="go">Try it →</span></a>
+    </div>
+  </div></section>
+
+  <section class="film" id="film"><div class="frame">
+    <figure class="player" id="player">
+      <button type="button" class="facade" id="facade" aria-label="Play the video">
+        <img src="poster.jpg" alt="" width="1600" height="900">
+        <span class="play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Watch the video</span>
+      </button>
+      <figcaption><span>A short explainer of the poem and how it was decoded</span></figcaption>
+    </figure>
+  </div></section>
+
+  
+</main>
+<script src="layout.js?v=5"></script>
+<script>
+document.getElementById('facade').addEventListener('click', function () {
+  const id = (window.SITE_LINKS || {}).youtube;
+  let el;
+  if (id) {
+    el = document.createElement('iframe');
+    el.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    el.title = 'Siribhūvalaya video'; el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; el.allowFullscreen = true;
+  } else {
+    el = document.createElement('video'); el.src = 'opening.mp4'; el.controls = true; el.autoplay = true; el.playsInline = true;
+  }
+  this.replaceWith(el);
+});
+</script>
+<script>
+fetch('data/ch15_page1.json').then(r=>r.json()).then(D=>{
+  const g=document.getElementById('hg'), els=D.cells.map(v=>{const d=document.createElement('div');d.textContent=v||'';g.appendChild(d);return d;});
+  const snd=document.getElementById('hgsnd');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let i=0; setInterval(()=>{ if(i>=D.path.length){els.forEach(e=>e.classList.remove('on','cur'));i=0;return;}
+    if(i>0){const [pr,pc]=D.path[i-1]; els[pr*27+pc].classList.replace('cur','on');}
+    const [r,c]=D.path[i]; const v=D.cells[r*27+c]; els[r*27+c].classList.add('cur'); snd.textContent=(D.sym[v]||['',''])[0]+'  '+(D.sym[v]||['',''])[1]; i++; },140);
+});
+</script>
+</body>
+</html>

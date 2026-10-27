@@ -1,19 +1,28 @@
 name: Correct a verse
-description: Suggest a better reading or English translation for one verse
+description: Suggest a better Kannada reading, word split or English translation for one verse
 title: "Correction: chapter <ch>, verse <v>"
 labels: [correction]
 body:
+  - type: markdown
+    attributes:
+      value: "Fill in only the parts you are correcting. Your correction becomes a pull request; once enough readers and a maintainer approve it, it goes into the website and the download, with your name on the verse."
   - type: input
     id: where
     attributes: {label: Chapter and verse, placeholder: "15.1"}
     validations: {required: true}
   - type: textarea
     id: current
-    attributes: {label: What the site says now, description: Paste the Kannada, Roman or English as shown}
+    attributes: {label: What the site says now, description: Filled in for you when you come from the website}
   - type: textarea
-    id: suggested
-    attributes: {label: Your correction}
-    validations: {required: true}
+    id: kannada
+    attributes: {label: Corrected Kannada, description: The whole verse in Kannada script}
+  - type: textarea
+    id: roman
+    attributes: {label: Corrected Roman words, description: The whole verse in Roman letters, split into words}
+  - type: textarea
+    id: english
+    attributes: {label: Corrected English, description: The whole English line}
   - type: textarea
     id: why
-    attributes: {label: Why, description: "Your reading, a dictionary entry, a parallel text — anything that helps check it"}
+    attributes: {label: Why, description: "Your reading, a dictionary entry, a parallel text: anything that helps others check it"}
+    validations: {required: true}

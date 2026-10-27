@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Help · Siribhūvalaya</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+.top{padding-block:56px 36px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.vid{aspect-ratio:16/9;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:15px;background:var(--tile)}
+.vid .t{font-weight:600;color:var(--fg)}
+.steps{display:grid;gap:14px}
+.stp{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:18px 20px;border:1px solid var(--line);border-radius:10px}
+.stp .k{width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px}
+.stp h3{font-size:18px;margin:0 0 4px}
+.stp p{font-size:15px;color:var(--muted);margin:0}
+.go{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.fb{margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}
+.fb .two{align-items:start}
+.fb form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.row3{display:flex;gap:12px;align-items:center}
+.fb label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
+.fb input,.fb textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.fb textarea{min-height:140px;resize:vertical}
+.msg{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <div class="frame top">
+    <p class="eyebrow">Help</p>
+    <h1>We can read the letters. We need people who read the words.</h1>
+    <p class="lede" style="max-width:800px">All 20,640 verses are in Kannada letters, each with a first machine translation into English. Much of that English is wrong. The poem needs readers of Old Kannada.</p>
+  </div>
+
+  <div class="frame two">
+    <div class="vid" id="howto" data-link="howto"><span class="t">How to correct a verse</span><span>Short walkthrough · coming soon</span></div>
+    <div>
+      <div class="steps">
+        <div class="stp"><span class="k">1</span><div><h3>Open a chapter</h3><p>Every verse is shown in Kannada, in Roman letters and in rough English.</p></div></div>
+        <div class="stp"><span class="k">2</span><div><h3>Suggest a correction</h3><p>Under the verse, “Suggest a correction” opens a short form on GitHub with the verse already filled in. A free GitHub account is needed.</p></div></div>
+        <div class="stp"><span class="k">3</span><div><h3>It goes into the text</h3><p>Corrections are checked and added to the site and the download, with the reader credited.</p></div></div>
+      </div>
+      <div class="go"><a class="btn primary" href="chapters.html">Open the chapters</a><a class="btn" id="repo" target="_blank" rel="noopener">The data and tools on GitHub</a></div>
+    </div>
+  </div>
+
+  
+</main>
+<script src="layout.js?v=5"></script>
+<script>
+document.getElementById('repo').href = window.SITE_REPO || 'https://github.com/snrahulsn/siribhoovalaya';
+const HOWTO = (window.SITE_LINKS || {}).howto;
+if (HOWTO) { const v = document.getElementById('howto'); const f = document.createElement('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(HOWTO) + '?rel=0&modestbranding=1'; f.title = 'How to correct a verse'; f.allowFullscreen = true; f.style.cssText = 'width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px'; v.replaceWith(f); }
+
+</script>
+</body>
+</html>
