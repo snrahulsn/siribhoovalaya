@@ -10,7 +10,7 @@ window.SITE_REPO = 'https://github.com/snrahulsn/siribhoovalaya';
     `<footer class="site-foot"><div class="frame"><span>With thanks to Yellappa Shastri, who acquired the manuscript and spent his life on it; Karlamangalam Srikantaiah and K. Ananthasubba Rao, who worked with him and typed out its tables; Sudharthi of Hassan, who traced its hidden texts by hand; Anil Kumar Jain; Aruhant Mehta, whose public code reads its grids; and <a href="https://www.youtube.com/@kagwadspkumudendarthi" target="_blank" rel="noopener">Dr S. P. Kagwad</a>. Their material was invaluable in validating our output.</span><span>Grids from the National Archives of India (Abhilekh Patal, Acc. 507). Data, tools and corrections on <a href="${window.SITE_REPO}" target="_blank" rel="noopener">GitHub</a>.</span><span>A non-commercial project. Nothing here is for sale.</span></div></footer>`);
 })();
 // Links that do not exist yet: fill these in when they do.
-window.SITE_LINKS = { github: "https://github.com/snrahulsn/siribhoovalaya", youtube: "RFuBJIJSoBk", howto: "" };
+window.SITE_LINKS = { github: "https://github.com/snrahulsn/siribhoovalaya", youtube: "zEp2OFqFVb8", howto: "" };
 // Page-visit counter (GoatCounter: no cookies, private dashboard). Not counted on local previews.
 if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
   const s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
