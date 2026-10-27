@@ -1,0 +1,548 @@
+[
+ {
+  "claim": "Nirvāṇa-bhakti 5",
+  "location": "ch.33 long S1 down (loose)",
+  "identity": [
+   32,
+   42
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -25,
+  "alignment_score": 45,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Nirvāṇa-bhakti 2",
+  "location": "ch.34 long S1 down (loose)",
+  "identity": [
+   31,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -26,
+  "alignment_score": 51,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Nirvāṇa-bhakti 18",
+  "location": "ch.35 long S1 down (loose)",
+  "identity": [
+   31,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -26,
+  "alignment_score": 40,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Samadhibhakti Sanskrit:11",
+  "location": "ch.50 short:E1:down",
+  "identity": [
+   35,
+   45
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -21,
+  "alignment_score": 50,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Samadhibhakti Sanskrit:11",
+  "location": "ch.50 merged:E1:down",
+  "identity": [
+   36,
+   45
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -19,
+  "alignment_score": 17,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Santibhakti Sanskrit:11",
+  "location": "ch.53 short:E1:down",
+  "identity": [
+   42,
+   51
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -31,
+  "alignment_score": 66,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Santibhakti Sanskrit:1",
+  "location": "ch.57 short:E2:down",
+  "identity": [
+   39,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -29,
+  "alignment_score": 61,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Santibhakti Sanskrit:1",
+  "location": "ch.57 merged:E2:down",
+  "identity": [
+   39,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -29,
+  "alignment_score": 25,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:3",
+  "location": "ch.51 short:E1:down",
+  "identity": [
+   65,
+   86
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -56,
+  "alignment_score": 88,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:4",
+  "location": "ch.51 short:E2:down",
+  "identity": [
+   39,
+   49
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -25,
+  "alignment_score": 62,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:4",
+  "location": "ch.51 merged:E2:down",
+  "identity": [
+   39,
+   49
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -27,
+  "alignment_score": 26,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:8",
+  "location": "ch.56 short:E1:down",
+  "identity": [
+   37,
+   47
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -26,
+  "alignment_score": 53,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:8",
+  "location": "ch.56 merged:E1:down",
+  "identity": [
+   36,
+   47
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -26,
+  "alignment_score": 35,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:21",
+  "location": "ch.58 short:E2:down",
+  "identity": [
+   31,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -16,
+  "alignment_score": 45,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:21",
+  "location": "ch.58 merged:E2:down",
+  "identity": [
+   31,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -19,
+  "alignment_score": 11,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:4",
+  "location": "ch.51 package:51-short_second_from_last:listed",
+  "identity": [
+   39,
+   49
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -25,
+  "alignment_score": 62,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Santibhakti Sanskrit:1",
+  "location": "ch.57 package:57-short_second_from_last:listed",
+  "identity": [
+   39,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -29,
+  "alignment_score": 61,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Caityabhakti Sanskrit:21",
+  "location": "ch.58 package:58-short_second_from_last:listed",
+  "identity": [
+   31,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -16,
+  "alignment_score": 45,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:1",
+  "location": "34-long-E1-down",
+  "identity": [
+   37,
+   47
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -19,
+  "alignment_score": 60,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:117",
+  "location": "43-short-E1-down",
+  "identity": [
+   43,
+   52
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -28,
+  "alignment_score": 72,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:117",
+  "location": "43-merged-E1-down",
+  "identity": [
+   43,
+   52
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -29,
+  "alignment_score": 36,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:87",
+  "location": "44-short-E1-down",
+  "identity": [
+   39,
+   45
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -18,
+  "alignment_score": 68,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:124",
+  "location": "44-short-E1-down",
+  "identity": [
+   41,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -27,
+  "alignment_score": 67,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:87",
+  "location": "44-merged-E1-down",
+  "identity": [
+   39,
+   45
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 50,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:124",
+  "location": "44-merged-E1-down",
+  "identity": [
+   39,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -26,
+  "alignment_score": 45,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:39",
+  "location": "45-short-E1-down",
+  "identity": [
+   36,
+   43
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 57,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:39",
+  "location": "45-merged-E1-down",
+  "identity": [
+   36,
+   43
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 21,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:19",
+  "location": "46-short-E1-down",
+  "identity": [
+   33,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -22,
+  "alignment_score": 55,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:100",
+  "location": "46-short-E1-down",
+  "identity": [
+   36,
+   43
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 61,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:112",
+  "location": "46-short-E1-down",
+  "identity": [
+   35,
+   42
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 59,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:123",
+  "location": "46-short-E1-down",
+  "identity": [
+   36,
+   47
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -22,
+  "alignment_score": 47,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:127",
+  "location": "46-short-E1-down",
+  "identity": [
+   31,
+   41
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 42,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:19",
+  "location": "46-merged-E1-down",
+  "identity": [
+   33,
+   40
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 37,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:100",
+  "location": "46-merged-E1-down",
+  "identity": [
+   35,
+   43
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 40,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:112",
+  "location": "46-merged-E1-down",
+  "identity": [
+   35,
+   42
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 41,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:105",
+  "location": "47-short-E1-down",
+  "identity": [
+   33,
+   44
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -21,
+  "alignment_score": 43,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:107",
+  "location": "47-short-E1-down",
+  "identity": [
+   31,
+   41
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -21,
+  "alignment_score": 41,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:92",
+  "location": "47-short-E2-down",
+  "identity": [
+   41,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -29,
+  "alignment_score": 71,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:105",
+  "location": "47-merged-E1-down",
+  "identity": [
+   33,
+   44
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -20,
+  "alignment_score": 25,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:107",
+  "location": "47-merged-E1-down",
+  "identity": [
+   31,
+   41
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -21,
+  "alignment_score": 23,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Jinasahasranama:92",
+  "location": "47-merged-E2-down",
+  "identity": [
+   39,
+   50
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -27,
+  "alignment_score": 47,
+  "verdict": "CONFIRMED"
+ },
+ {
+  "claim": "Samayikapatha:23",
+  "location": "ch57:short:end1:plain:down→ch58:merged:end1:plain:down",
+  "identity": [
+   46,
+   59
+  ],
+  "shuffle_ge": 0,
+  "decoys_ge": 0,
+  "decoy_max": -37,
+  "alignment_score": 53,
+  "verdict": "CONFIRMED"
+ }
+]

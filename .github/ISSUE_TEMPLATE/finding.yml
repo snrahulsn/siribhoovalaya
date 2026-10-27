@@ -1,0 +1,12 @@
+name: A finding
+description: A reading shape, a hidden text, or anything else in the grids
+title: "Finding: "
+labels: [finding]
+body:
+  - type: textarea
+    id: what
+    attributes: {label: What you found, description: "Chapter, page or verses, the rule you followed, and the letters it gives"}
+    validations: {required: true}
+  - type: textarea
+    id: source
+    attributes: {label: The text it matches, description: Name and verse of the known text, if any}

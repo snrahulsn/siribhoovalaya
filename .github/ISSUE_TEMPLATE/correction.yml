@@ -1,0 +1,19 @@
+name: Correct a verse
+description: Suggest a better reading or English translation for one verse
+title: "Correction: chapter <ch>, verse <v>"
+labels: [correction]
+body:
+  - type: input
+    id: where
+    attributes: {label: Chapter and verse, placeholder: "15.1"}
+    validations: {required: true}
+  - type: textarea
+    id: current
+    attributes: {label: What the site says now, description: Paste the Kannada, Roman or English as shown}
+  - type: textarea
+    id: suggested
+    attributes: {label: Your correction}
+    validations: {required: true}
+  - type: textarea
+    id: why
+    attributes: {label: Why, description: "Your reading, a dictionary entry, a parallel text — anything that helps check it"}
