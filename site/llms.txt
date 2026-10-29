@@ -1,0 +1,17 @@
+# Siribhūvalaya (Siribhoovalaya, Siribhuvalaya, ಸಿರಿಭೂವಲಯ)
+
+> A Kannada Jain poem of more than 20,000 verses by Ācārya Kumudendu (9th century), written entirely in numbers 1–64 on 27×27 grids (1,268 pages). This site has every grid, the decoded Kannada text of all 59 chapters with first English drafts, the hidden texts (Bhagavad Gītā and Jain verses read down the chapters), and a short film. The decoding was done independently with Claude (AI); the English is a rough draft.
+
+## Pages
+- [How it's read](https://siribhoovalaya.com/read.html): 64 sounds numbered 1–64; a diagonal magic-square walk inside each 9×9 square; a key per chapter.
+- [Read the poem](https://siribhoovalaya.com/chapters.html): all 59 chapters, each verse in Kannada, Roman letters and English. Chapter N is at chapter.html?c=N.
+- [Hidden texts](https://siribhoovalaya.com/texts.html): 64 verses (34 Bhagavad Gītā, 25 Jain texts, 5 headed Śrutāvatāra) spelled by one letter per verse, each tested against shuffles.
+- [Try it out](https://siribhoovalaya.com/play.html): read a page along any route and test it against shuffles.
+- [Film](https://youtu.be/5zayw_RwuP8): Siribhūvalaya: Decoding a 9th-Century Jain Cipher with AI (17 min).
+
+## Data
+- [Download (zip)](https://siribhoovalaya.com/siribhuvalaya-data.zip): grids, decoded text, hidden texts, certification and audits.
+- [GitHub](https://github.com/snrahulsn/siribhoovalaya): the same data as CSV, plus the siritools Python toolkit. Data CC BY 4.0, code MIT.
+
+## Sources
+- Manuscript grids: National Archives of India, Abhilekh Patal, Accession 507.
