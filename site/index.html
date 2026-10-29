@@ -49,13 +49,13 @@
 @media (max-width:900px){.start .steps{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.start .steps{grid-template-columns:1fr}}
 .cta3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:32px}
-.cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:18px 18px 16px;min-height:132px;border-radius:14px;background:var(--accent);color:var(--on-accent);text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:18px 18px 16px;min-height:132px;border-radius:14px;background:var(--bg);color:var(--fg);border:1.5px solid var(--line);text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
 .cta b{display:block;font-size:17px;font-weight:600;line-height:1.2}
-.cta small{display:block;font-size:13px;opacity:.8;margin-top:3px}
-.cta .ic{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18)}
-.cta .ic svg{width:20px;height:20px;fill:var(--on-accent);overflow:visible}
-.cta .ic svg.pen{fill:none;stroke:var(--on-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cta:hover{transform:translateY(-3px);box-shadow:0 12px 26px -12px var(--accent)}
+.cta small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.cta .ic{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent-soft)}
+.cta .ic svg{width:20px;height:20px;fill:var(--accent);overflow:visible}
+.cta .ic svg.pen{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cta:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 26px -14px var(--accent)}
 .cta .play{transform-origin:12px 12px;animation:ctaPlay 2.4s ease-in-out infinite}
 .cta .grid4 rect{animation:ctaCell 2.4s ease-in-out infinite;opacity:.35}
 .cta .grid4 rect:nth-child(2){animation-delay:.6s}.cta .grid4 rect:nth-child(3){animation-delay:1.2s}.cta .grid4 rect:nth-child(4){animation-delay:1.8s}
