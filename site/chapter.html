@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://siribhoovalaya.goatcounter.com; media-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://siribhoovalaya.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'"><meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- seo -->
+<meta name="description" content="One chapter of the Siribhoovalaya, decoded from its number grids: each verse in Kannada, Roman letters and English, with a link to suggest corrections.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Siribhūvalaya">
+<meta property="og:title" content="Siribhūvalaya chapter: Kannada text and English translation"><meta property="og:description" content="One chapter of the Siribhoovalaya, decoded from its number grids: each verse in Kannada, Roman letters and English, with a link to suggest corrections.">
+<meta property="og:url" content="https://siribhoovalaya.com/chapter.html"><meta property="og:image" content="https://siribhoovalaya.com/poster.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@the_indophile">
+<meta name="twitter:title" content="Siribhūvalaya chapter: Kannada text and English translation"><meta name="twitter:description" content="One chapter of the Siribhoovalaya, decoded from its number grids: each verse in Kannada, Roman letters and English, with a link to suggest corrections."><meta name="twitter:image" content="https://siribhoovalaya.com/poster.jpg">
+<!-- /seo -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Chapter · Siribhūvalaya</title>
+<title>Siribhūvalaya chapter: Kannada text and English translation</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css?v=6">
@@ -51,7 +59,8 @@
 const c = Math.min(59, Math.max(1, parseInt(new URLSearchParams(location.search).get('c'), 10) || 1));
 const FILE = c <= 8 ? '1_8' : c <= 20 ? '9_20' : c <= 33 ? '21_33' : c <= 46 ? '34_46' : '47_59';
 const $ = id => document.getElementById(id);
-document.title = 'Chapter ' + c + ' · Siribhūvalaya';
+document.title = 'Siribhūvalaya chapter ' + c + ': Kannada text and English translation';
+{ const l = document.createElement('link'); l.rel = 'canonical'; l.href = 'https://siribhoovalaya.com/chapter.html?c=' + c; document.head.appendChild(l); }
 $('title').textContent = 'Chapter ' + c; $('crumb').textContent = c;
 $('prev').href = 'chapter.html?c=' + (c - 1); $('prev').textContent = '← Chapter ' + (c - 1);
 $('next').href = 'chapter.html?c=' + (c + 1); $('next').textContent = 'Chapter ' + (c + 1) + ' →';
