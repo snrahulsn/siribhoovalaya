@@ -48,6 +48,13 @@
 .steps .sa{margin-top:auto;padding-top:10px;color:var(--accent);font-weight:500;font-size:15px}
 @media (max-width:900px){.start .steps{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.start .steps{grid-template-columns:1fr}}
+.btn.try{position:relative;color:var(--accent);border:1.5px solid var(--accent);background:var(--accent-soft);font-weight:600}
+.btn.try::after{content:"";position:absolute;inset:-1.5px;border-radius:inherit;box-shadow:0 0 0 0 var(--accent);opacity:.45;animation:tryPulse 2.4s ease-out infinite;pointer-events:none}
+.btn.try .arr{display:inline-block;animation:tryNudge 2.4s ease-in-out infinite}
+.btn.try:hover{background:var(--accent);color:var(--on-accent)}
+@keyframes tryPulse{0%{box-shadow:0 0 0 0 var(--accent);opacity:.45}70%,100%{box-shadow:0 0 0 10px var(--accent);opacity:0}}
+@keyframes tryNudge{0%,60%,100%{transform:translateX(0)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.btn.try::after,.btn.try .arr{animation:none}}
 </style>
 </head>
 <body>
@@ -59,7 +66,7 @@
       <p class="lede">A 1,200-year-old Kannada Jain poem, written entirely in numbers: one number for each of 64 sounds, across 1,268 grids.</p>
       <p>We used AI to turn all 59 chapters back into Kannada and draft an English translation. Hidden inside, one letter per verse read down a chapter, are <a href="texts.html">64 more verses from the Bhagavad Gītā and Jain scriptures</a>.</p>
       <p>The English is rough. If you read Old Kannada, <a href="help.html">help us correct it</a>.</p>
-      <div class="btn-row" style="margin-top:28px"><a class="btn primary" href="#film">Watch the video</a><a class="btn" href="read.html">See how it's read</a><a class="btn" href="chapters.html">Read the poem</a><a class="btn" href="texts.html">Hidden texts</a><a class="btn" href="play.html">Try it out</a></div>
+      <div class="btn-row" style="margin-top:28px"><a class="btn primary" href="#film">Watch the video</a><a class="btn" href="read.html">See how it's read</a><a class="btn" href="chapters.html">Read the poem</a><a class="btn try" href="play.html">Try it out <span class="arr" aria-hidden="true">→</span></a></div>
     </div>
     <figure class="hero-grid" aria-label="Chapter 15, page 1, being read along its path">
       <div class="hg" id="hg"></div>
