@@ -48,13 +48,20 @@
 .steps .sa{margin-top:auto;padding-top:10px;color:var(--accent);font-weight:500;font-size:15px}
 @media (max-width:900px){.start .steps{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.start .steps{grid-template-columns:1fr}}
-.btn.try{position:relative;overflow:hidden;background:var(--accent);color:var(--on-accent);border:0;font-weight:600}
-.btn.try::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:tryShine 3.2s ease-in-out infinite;pointer-events:none}
-.btn.try .arr{display:inline-block;margin-left:4px;animation:tryNudge 3.2s ease-in-out infinite}
-.btn.try:hover{opacity:.92}
-@keyframes tryShine{0%,55%{left:-60%}85%,100%{left:130%}}
-@keyframes tryNudge{0%,60%,100%{transform:translateX(0)}75%{transform:translateX(4px)}}
-@media (prefers-reduced-motion:reduce){.btn.try::after,.btn.try .arr{animation:none}}
+.cta3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:32px}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:18px 18px 16px;min-height:132px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.cta b{display:block;font-size:17px;font-weight:600;line-height:1.2}
+.cta small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.cta .ic{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent-soft)}
+.cta .ic svg{width:20px;height:20px;fill:var(--accent);stroke:var(--accent);stroke-width:0}
+.cta:nth-child(3) .ic svg{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cta:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 24px -12px var(--accent)}
+.cta.main{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.cta.main small{color:var(--on-accent);opacity:.8}
+.cta.main .ic{background:rgba(255,255,255,.18)}
+.cta.main .ic svg{fill:var(--on-accent)}
+@media (max-width:640px){.cta3{grid-template-columns:1fr}.cta{flex-direction:row;align-items:center;min-height:0}}
+@media (prefers-reduced-motion:reduce){.cta{transition:none}.cta:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -66,7 +73,11 @@
       <p class="lede">A 1,200-year-old Kannada Jain poem, written entirely in numbers: one number for each of 64 sounds, across 1,268 grids.</p>
       <p>We used AI to turn all 59 chapters back into Kannada and draft an English translation. Hidden inside, one letter per verse read down a chapter, are <a href="texts.html">64 more verses from the Bhagavad Gītā and Jain scriptures</a>.</p>
       <p>The English is rough. If you read Old Kannada, <a href="help.html">help us correct it</a>.</p>
-      <div class="btn-row" style="margin-top:28px"><a class="btn" href="#film">Watch the video</a><a class="btn" href="read.html">See how it's read</a><a class="btn try" href="play.html">Try it out <span class="arr" aria-hidden="true">→</span></a></div>
+      <div class="cta3">
+        <a class="cta main" href="#film"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span><b>Watch the film</b><small>17 minutes</small></span></a>
+        <a class="cta" href="read.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg></span><span><b>How it's read</b><small>Step through a real page</small></span></a>
+        <a class="cta" href="play.html"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16zM14 6l3 3"/></svg></span><span><b>Try it out</b><small>Read a page yourself</small></span></a>
+      </div>
     </div>
     <figure class="hero-grid" aria-label="Chapter 15, page 1, being read along its path">
       <div class="hg" id="hg"></div>
