@@ -61,11 +61,8 @@
 .cta .ic{position:relative}
 .cta .play path,.cta .tap path{transform-box:fill-box;transform-origin:center}
 .cta .play path{animation:ctaPlay 1.8s ease-in-out infinite}
-.cta:nth-child(1) .ic::after,.cta:nth-child(3) .ic::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:0;animation:ctaRing 1.8s ease-out infinite}
-.cta:nth-child(3) .ic::after{animation-delay:.35s}
 .cta .tap path{animation:ctaTap 1.8s ease-in-out infinite}
 @keyframes ctaPlay{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}}
-@keyframes ctaRing{0%{transform:scale(.8);opacity:.6}80%,100%{transform:scale(1.5);opacity:0}}
 @keyframes ctaTap{0%,100%{transform:translateY(0) scale(1)}20%{transform:translateY(-3px) scale(1)}35%{transform:translateY(1px) scale(.92)}50%{transform:translateY(0) scale(1)}}
 @media (max-width:640px){.cta3{grid-template-columns:1fr}.cta{flex-direction:row;align-items:center;min-height:0}}
 @media (prefers-reduced-motion:reduce){.cta,.cta .play path,.cta .tap path,.cta .ic::after,.cta .grid4 rect{animation:none;transition:none}.cta .grid4 rect{opacity:1}.cta:hover{transform:none}}
