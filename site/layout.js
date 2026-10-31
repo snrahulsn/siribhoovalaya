@@ -12,9 +12,17 @@ window.SITE_REPO = 'https://github.com/snrahulsn/siribhoovalaya';
   };
   const social = `<div class="social"><a href="${window.SITE_REPO}" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">${ico.gh}</a><a href="https://x.com/the_indophile" target="_blank" rel="noopener" aria-label="The Indophile on X" title="X">${ico.x}</a><a href="https://www.youtube.com/channel/UCsVH0ZIvAbplkY_3YhCI4fg" target="_blank" rel="noopener" aria-label="The Indophile on YouTube" title="YouTube">${ico.yt}</a><button type="button" class="share-btn" aria-label="Share this page">${ico.share}<span>Share</span></button><div class="share-menu" hidden><a data-share="x" target="_blank" rel="noopener">Post on X</a><a data-share="wa" target="_blank" rel="noopener">WhatsApp</a><button type="button" data-share="copy">Copy link</button></div></div>`;
   document.body.insertAdjacentHTML("afterbegin",
-    `<header class="site-head"><div class="frame"><a class="logo" href="index.html"><img src="favicon.svg" alt="">Siribhūvalaya</a><nav class="site-nav" aria-label="Main">${nav}</nav>${social}</div></header>`);
+    `<header class="site-head"><div class="frame"><a class="logo" href="index.html"><img src="favicon.svg" alt="">Siribhūvalaya</a><nav class="site-nav" aria-label="Main">${nav}</nav></div></header>`);
   document.body.insertAdjacentHTML("beforeend",
     `<footer class="site-foot"><div class="frame"><span>With thanks to Yellappa Shastri, who acquired the manuscript and spent his life on it; Karlamangalam Srikantaiah and K. Ananthasubba Rao, who worked with him and typed out its tables; Sudharthi of Hassan, who traced its hidden texts by hand; Anil Kumar Jain; Aruhant Mehta, whose public code reads its grids; and <a href="https://www.youtube.com/@kagwadspkumudendarthi" target="_blank" rel="noopener">Dr S. P. Kagwad</a>. Their material was invaluable in validating our output.</span><span>Grids from the National Archives of India (Abhilekh Patal, Acc. 507). Data, tools and corrections on <a href="${window.SITE_REPO}" target="_blank" rel="noopener">GitHub</a>.</span><span>A non-commercial project. Nothing here is for sale. Follow The Indophile on <a href="https://www.youtube.com/channel/UCsVH0ZIvAbplkY_3YhCI4fg" target="_blank" rel="noopener">YouTube</a> and <a href="https://x.com/the_indophile" target="_blank" rel="noopener">X</a>.</span>${social}</div></footer>`);
+  // Side rail with the same links; a small tab slides it in and out (remembered per visitor).
+  document.body.insertAdjacentHTML("beforeend", `<aside class="side-rail" aria-label="Share and follow">${social}<button type="button" class="rail-tab" aria-label="Hide or show share links"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M15 6l-6 6 6 6"/></svg></button></aside>`);
+  const rail = document.querySelector(".side-rail");
+  try { if (localStorage.getItem("railHidden") === "1") rail.classList.add("hidden"); } catch (e) {}
+  rail.querySelector(".rail-tab").addEventListener("click", () => {
+    rail.classList.toggle("hidden");
+    try { localStorage.setItem("railHidden", rail.classList.contains("hidden") ? "1" : "0"); } catch (e) {}
+  });
   // Share: the phone's own share sheet where there is one, else a small menu (X, WhatsApp, copy link).
   document.querySelectorAll(".social").forEach((box) => {
     const btn = box.querySelector(".share-btn"), menu = box.querySelector(".share-menu");
