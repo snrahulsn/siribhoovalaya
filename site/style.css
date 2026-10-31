@@ -94,3 +94,17 @@ a.card:hover{border-color:var(--accent)}
   .site-nav::-webkit-scrollbar{display:none}
   .site-nav a.nav-cta{padding:6px 12px}
 }
+.social{display:flex;align-items:center;gap:14px;position:relative}
+.social a,.social .share-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;background:none;border:0;padding:4px;cursor:pointer;font:inherit;font-size:14px}
+.social a:hover,.social .share-btn:hover{color:var(--fg)}
+.social svg{width:18px;height:18px}
+.social .share-btn{border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.share-menu{position:absolute;right:0;top:calc(100% + 8px);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:6px;display:flex;flex-direction:column;min-width:150px;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.share-menu[hidden]{display:none}
+.share-menu a,.share-menu button{padding:8px 10px;border-radius:8px;color:var(--fg)!important;font-size:14px;text-align:left}
+.share-menu a:hover,.share-menu button:hover{background:var(--tile)}
+.site-foot .social{flex-basis:100%}
+@media (max-width:700px){.site-head .social{justify-content:flex-start;gap:16px}}
+@media (max-width:1100px){.site-head .social .share-btn span{display:none}.site-head .social .share-btn{padding:5px 8px}.site-nav{gap:18px}.social{gap:10px}}
+.share-menu button{border:0;background:none;cursor:pointer;font:inherit}
+@media (max-width:700px){.site-head .share-menu{right:auto;left:110px}}
