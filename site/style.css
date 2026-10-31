@@ -119,5 +119,5 @@ a.card:hover{border-color:var(--accent)}
 .rail-tab svg{width:14px;height:14px;transition:transform .35s ease}
 .side-rail.hidden{transform:translate(calc(-100% + 22px),-50%)}
 .side-rail.hidden .rail-tab svg{transform:rotate(180deg)}
-@media (max-width:700px){.side-rail{top:auto;bottom:90px;transform:none}.side-rail.hidden{transform:translateX(calc(-100% + 22px))}}
+@media (max-width:700px){.side-rail .social a,.side-rail .share-btn{padding:6px}.side-rail .social svg{width:18px;height:18px}}
 @media (prefers-reduced-motion:reduce){.side-rail,.rail-tab svg{transition:none}}
