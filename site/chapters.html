@@ -59,7 +59,7 @@ mark{background:var(--accent-soft);color:var(--accent);padding:0 2px;border-radi
 fetch('data/chapters.json').then(r => r.json()).then(C => {
   const g = document.getElementById('grid');
   C.forEach(ch => {
-    const a = document.createElement('a'); a.className = 'ch'; a.href = 'chapter.html?c=' + ch.c;
+    const a = document.createElement('a'); a.className = 'ch'; a.href = 'chapter-' + ch.c + '.html';
     a.innerHTML = '<span class="n"></span><span class="t"></span><span class="go">Read →</span>';
     a.querySelector('.n').textContent = 'Chapter ' + ch.c + ' · ' + ch.lines + ' verses';
     a.querySelector('.t').textContent = ch.s;
@@ -75,7 +75,7 @@ function run() {
   if (!IDX) { hint.textContent = 'Loading…'; if (!loading) { loading = true; fetch('data/search_index.json').then(r => r.json()).then(d => { IDX = d; run(); }); } return; }
   const hits = []; for (const h of IDX) { if (h[2].includes(q) || h[3].toLowerCase().includes(q)) { hits.push(h); if (hits.length >= 200) break; } }
   hint.textContent = hits.length ? (hits.length >= 200 ? 'First 200 verses' : hits.length + ' verse' + (hits.length === 1 ? '' : 's')) : 'No verses found.';
-  hits.forEach(([c, n, kn, en]) => { const a = document.createElement('a'); a.className = 'hit'; a.href = 'chapter.html?c=' + c + '#v' + n;
+  hits.forEach(([c, n, kn, en]) => { const a = document.createElement('a'); a.className = 'hit'; a.href = 'chapter-' + c + '.html#v' + n;
     a.innerHTML = `<span class="where">Chapter ${c} · verse ${n}</span><span><div class="kn">${mark(kn, q)}</div><div class="en">${mark(en, q)}</div></span>`; res.appendChild(a); });
 }
 $('q').addEventListener('input', run);

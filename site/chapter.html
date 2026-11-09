@@ -57,10 +57,11 @@
 <script src="layout.js?v=12"></script>
 <script>
 const c = Math.min(59, Math.max(1, parseInt(new URLSearchParams(location.search).get('c'), 10) || 1));
+location.replace('chapter-' + c + '.html' + location.hash);  // each chapter now has its own static page
 const FILE = c <= 8 ? '1_8' : c <= 20 ? '9_20' : c <= 33 ? '21_33' : c <= 46 ? '34_46' : '47_59';
 const $ = id => document.getElementById(id);
 document.title = 'Siribhūvalaya chapter ' + c + ': Kannada text and English translation';
-{ const l = document.createElement('link'); l.rel = 'canonical'; l.href = 'https://siribhoovalaya.com/chapter.html?c=' + c; document.head.appendChild(l); }
+{ const l = document.createElement('link'); l.rel = 'canonical'; l.href = 'https://siribhoovalaya.com/chapter-' + c + '.html'; document.head.appendChild(l); }
 $('title').textContent = 'Chapter ' + c; $('crumb').textContent = c;
 $('prev').href = 'chapter.html?c=' + (c - 1); $('prev').textContent = '← Chapter ' + (c - 1);
 $('next').href = 'chapter.html?c=' + (c + 1); $('next').textContent = 'Chapter ' + (c + 1) + ' →';

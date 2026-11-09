@@ -1,3 +1,6 @@
 __pycache__/
 .DS_Store
 summary.md
+
+# built at deploy by scripts/build_chapter_pages.py
+site/chapter-*.html
