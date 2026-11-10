@@ -121,3 +121,11 @@ a.card:hover{border-color:var(--accent)}
 .side-rail.hidden .rail-tab svg{transform:rotate(180deg)}
 @media (max-width:700px){.side-rail .social a,.side-rail .share-btn{padding:6px}.side-rail .social svg{width:18px;height:18px}}
 @media (prefers-reduced-motion:reduce){.side-rail,.rail-tab svg{transition:none}}
+/* the follow rail sits on the right */
+.side-rail{left:auto;right:0;flex-direction:row-reverse}
+.side-rail .social{border-left:1px solid var(--line);border-right:0;border-radius:14px 0 0 14px}
+.side-rail .share-menu{left:auto;right:calc(100% + 8px)}
+.rail-tab{margin-left:0;margin-right:-1px;border-left:1px solid var(--line);border-right:0;border-radius:10px 0 0 10px}
+.rail-tab svg{transform:rotate(180deg)}
+.side-rail.hidden{transform:translate(calc(100% - 22px),-50%)}
+.side-rail.hidden .rail-tab svg{transform:none}
