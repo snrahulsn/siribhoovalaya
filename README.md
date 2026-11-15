@@ -16,9 +16,9 @@ Website and film: [siribhoovalaya.com](https://siribhoovalaya.com)
 | `verses.csv` | Each verse as a run of reading ranks (`first_rank` to `last_rank`). 20,640 verses and lines. |
 | `symbols.csv` | The sound of each number: 27 vowels, 33 consonants and 4 sounds that follow a vowel. |
 | `siribhuvalaya.csv` | Every verse in Kannada letters, in Roman letters split into words, and a machine English draft (not checked by a reader). |
-| `hidden_texts.csv` | 68 passages spelled by one letter from each verse (64 distinct verses: 34 of the Bhagavad Gītā, 25 from Jain texts, 5 headed Śrutāvatāra), with the rule, the grid letters beside the source letters, and the scores. |
+| `hidden_texts.csv` | 68 passages spelled by one letter from each verse (64 distinct verses: 34 of the Bhagavad Gītā, 25 from Jain texts, 5 headed Śrutāvatāra), with the rule, the grid letters beside the source letters, and the scores. 67 pass all four checks; the five Śrutāvatāra verses are weak (64 % against the noisy print). |
 
-`docs/certification.md` says what was confirmed and how; `docs/checks/` holds the independent audits that rebuilt
+`docs/PAPER.md` is the paper: what we observed, how, and where we may be wrong. `docs/certification.md` says what was confirmed and how; `docs/checks/` holds the independent audits that rebuilt
 every hidden text from the raw numbers and tested it against 1,000 shuffles and 1,000 decoy verses.
 
 ## Tools (`siritools/`, Python 3.9+, standard library only)
@@ -32,6 +32,7 @@ python -m siritools align --passage 0 --shuffles 200 --decoys    # score a colum
 python -m siritools search "ಜಿನೇನ್ದ್ರ"                  # a Kannada or Roman string in every chapter and column rule
 python -m siritools audit                             # rebuild all 68 hidden passages and re-score them
 python -m siritools soundmap                          # the 1-64 sound table against shuffled tables
+python scripts/search_null.py                         # the whole Gītā search on real vs 20 shuffled copies (~30 min)
 python -m unittest                                    # run the tests
 ```
 
