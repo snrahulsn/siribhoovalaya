@@ -5,7 +5,7 @@ set in grids of 27 × 27. This repository holds an independent digital reading o
 Claude: every grid, its reading order, every verse in letters with a first English draft, and the 64 hidden
 verses found by reading one letter from each verse.
 
-Website and film: [siribhoovalaya.com](https://siribhoovalaya.com)
+Website and film: [siribhoovalaya.com](https://siribhoovalaya.com) · Paper (Zenodo): [doi:10.5281/zenodo.24250246](https://doi.org/10.5281/zenodo.24250246)
 
 ## Data (`data/`)
 
