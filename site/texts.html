@@ -57,6 +57,7 @@
 .card2 .meta{font-size:14px;color:var(--muted);margin:0 0 12px}
 .card2 .line{min-height:0}
 .card2 .src{font-size:15px;color:var(--muted);margin:12px 0 0}
+.card2 .mean{font-size:16px;margin:8px 0 0}
 .card2 details{margin-top:12px;font-size:14px}
 .card2 summary{cursor:pointer;color:var(--accent)}
 .vlist{margin-top:10px;display:grid;gap:2px;font-family:var(--mono);font-size:12.5px;max-height:320px;overflow:auto}
@@ -151,7 +152,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const tiles = (pairs, cls = '') => pairs.map(([g, s, ok]) => `<span class="t ${ok ? 'ok' : g ? 'miss' : 'gap'} ${cls}"><b>${esc(g || '·')}</b><i>${esc(s || '·')}</i></span>`).join('');
   const chs = c => c.length > 1 ? 'Chapters ' + c.join(', ').replace(/, (\d+)$/, ' and $1') : 'Chapter ' + c[0];
-  let D = [], filt = 'all', demoIdx = 0, timer = null;
+  let D = [], MEAN = {}, filt = 'all', demoIdx = 0, timer = null;
 
   function stats() {
     const g = new Set(D.filter(d => d.work === 'Bhagavad Gītā').map(d => d.verse)).size;
@@ -167,6 +168,7 @@
       <p class="meta">${chs(d.chapters)} · the ${esc(d.rule)}</p>
       <div class="line">${tiles(d.pairs)}</div>
       <p class="src">${esc(d.source_text)}</p>
+      ${MEAN[d.work + '|' + d.verse] ? `<p class="mean">${esc(MEAN[d.work + '|' + d.verse])}</p>` : ''}
       <button class="btn" type="button" data-view="${D.indexOf(d)}">See it in the grid</button><div class="viewer" hidden></div></article>`;
   }
 
@@ -290,7 +292,7 @@
   }
   $('list').addEventListener('click', e => { if (e.target.id === 'more') { window._more(); return; } const k = e.target.dataset && e.target.dataset.view; if (k === undefined) return; openViewer(e.target.closest('.card2'), D[Number(k)]); });
 
-  fetch('data/hidden_texts.json').then(r => r.json()).then(d => { D = d; stats(); filters(); list(); showDemo(); });
+  Promise.all([fetch('data/hidden_texts.json').then(r => r.json()), fetch('data/hidden_meanings.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))]).then(([d, m]) => { D = d; MEAN = m; stats(); filters(); list(); showDemo(); });
 })();
 </script>
 </body>
